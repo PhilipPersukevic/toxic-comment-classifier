@@ -32,48 +32,58 @@ The dataset files include:
 ```bash
 git clone https://github.com/yourusername/toxic-comment-classifier.git
 cd toxic-comment-classifier
+```
 
 2. (Optional) Create a virtual environment:
 
+```bash
 python -m venv venv
 # Linux/Mac
 source venv/bin/activate
 # Windows
 venv\Scripts\activate
+```
 
 3. Install dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
 4. Download NLTK resources:
 
+```bash
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
+```
 
-Usage
-Train the model
+##Usage
+#Train the model
+```bash
 from main import model_pipeline, train_df
 
 # Train the pipeline
 model_pipeline.fit(train_df["comment_text"], train_df["identity_hate"])
+```
 
-Predict new comments
+#Predict new comments
 
+```bash
 from main import predict_comment
 
 comment = "You are such an idiot!"
 label, prob = predict_comment(comment)
 print("Label:", label, "Probability:", prob)
+```
 
 Label = 1 → comment contains identity_hate
-
 Label = 0 → comment is not hateful
-
 Probability → model's confidence score
 
-Evaluate on test set
+#Evaluate on test set
 
+```bash
 from main import model_pipeline, test_df
 from sklearn.metrics import precision_score, recall_score
 import numpy as np
@@ -90,18 +100,24 @@ recall = recall_score(y_true, y_pred_thresh)
 
 print("Precision:", precision)
 print("Recall:", recall)
+```
 
-Example Output
+#Example Output
 Default threshold (0.5):
 
+```bash
 Precision: 0.14
 Recall: 0.86
+```
 
-Threshold adjusted for high precision (≈0.9996):
+#Threshold adjusted for high precision (≈0.9996):
+```bash
 Precision: 0.83
 Recall: 0.018
+```
 
-Example predictions:
+#Example predictions:
+```bash
 Comment: Hi, my name is Filip
 Predicted label: 0, Probability: 0.118
 
@@ -110,14 +126,18 @@ Predicted label: 1, Probability: 0.772
 
 Comment: I love this community!
 Predicted label: 0, Probability: 0.365
+```
 
 High precision threshold ensures most predicted identity_hate comments are correct.
 Trade-off: low recall because dataset is highly imbalanced.
 
-Model
+#Model
 The trained pipeline is saved as identity_hate_model.pkl and can be loaded using joblib:
+
+```bash
 import joblib
 
 model_pipeline = joblib.load("identity_hate_model.pkl")
+```
 
-Now you can use predict_comment() with the trained model.
+#Now you can use predict_comment() with the trained model.
