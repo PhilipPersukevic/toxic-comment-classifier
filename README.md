@@ -1,6 +1,10 @@
 # Toxic Comment Classifier
 
 ## Overview
+
+## Why this project matters
+This project focuses on handling highly imbalanced datasets and prioritizing high precision, which is critical in real-world content moderation systems to avoid false accusations.
+
 This project is a **machine learning classifier** for detecting comments containing **identity-based hate** (`identity_hate`).  
 The classifier uses **Logistic Regression** with **TF-IDF features** and **custom tokenization**, including punctuation removal, stopword removal, and stemming.
 
@@ -139,5 +143,12 @@ import joblib
 
 model_pipeline = joblib.load("identity_hate_model.pkl")
 ```
+
+## Tech Stack
+- Python
+- scikit-learn
+- NLTK
+- pandas
+- numpy
 
 # Now you can use predict_comment() with the trained model.
